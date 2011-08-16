@@ -36,6 +36,8 @@
  '(jde-jdk-registry (quote (("1.6" . "/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents"))))
  '(menu-bar-mode nil)
  '(scroll-bar-mode nil)
+ '(sh-basic-offset 2)
+ '(sh-indentation 2)
  '(show-trailing-whitespace t)
  '(speedbar-frame-parameters (quote ((minibuffer) (width . 40) (border-width . 0) (menu-bar-lines . 0) (tool-bar-lines . 0) (unsplittable . t) (left-fringe . 0))))
  '(tab-width 2)
