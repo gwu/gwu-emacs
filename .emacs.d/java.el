@@ -17,8 +17,25 @@
     (c-set-offset 'func-decl-cont '++)))
 (add-hook 'java-mode-hook 'java-indent-setup)
 
+;; Functions.
 (defun java-organize-imports ()
   "Organizes the imports in the current Java file by sorting and removing extranous imports"
   (interactive)
   (jde-import-kill-extra-imports)
   (jde-import-organize))
+
+;; Speedbar customization.
+(defun speedbar-expand-children ()
+  "Expands all children of the current node"
+  (interactive)
+  (setq p (point-marker))
+  (beginning-of-line)
+  (loop do
+        (speedbar-expand-line)
+        (forward-line)
+        while (and (not (eobp)) (not (equal (char-after) 48))))
+  (goto-char p))
+(define-key speedbar-key-map (kbd "o") 'speedbar-expand-children)
+(define-key speedbar-key-map (kbd "j") 'speedbar-next)
+(define-key speedbar-key-map (kbd "k") 'speedbar-prev)
+(define-key speedbar-key-map (kbd "c") 'speedbar-contract-line)
