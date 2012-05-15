@@ -39,3 +39,9 @@
 (define-key speedbar-key-map (kbd "j") 'speedbar-next)
 (define-key speedbar-key-map (kbd "k") 'speedbar-prev)
 (define-key speedbar-key-map (kbd "c") 'speedbar-contract-line)
+
+;; Parse maven compilation error messages.
+(add-to-list 'compilation-error-regexp-alist 'maven)
+(add-to-list 'compilation-error-regexp-alist-alist
+             '(maven "\\[ERROR\\] \\(.+?\\):\\[\\([0-9]+\\),\\([0-9]+\\)\\].*"
+                     1 2 3))

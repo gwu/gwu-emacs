@@ -3,6 +3,7 @@
 
 ;; Load Java settings.
 (load-file (expand-file-name "~/.emacs.d/java.el"))
+(load-file (expand-file-name "~/.emacs.d/compile.el"))
 
 ;; Fix the color formatting of the shell buffer
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
@@ -24,16 +25,20 @@
   ;; If there is more than one, they won't work right.
  '(c-basic-offset 2)
  '(column-number-mode t)
+ '(compilation-scroll-output t)
  '(compile-command "maven test-compile")
  '(default-frame-alist (quote ((vertical-scroll-bars) (width . 100) (height . 45))))
  '(global-hl-line-mode t)
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(jde-help-docsets (quote (("JDK API" "http://download.oracle.com/javase/6/docs/api" nil))))
+ '(jde-import-group-of-rules (quote (("^javax?\\." . "a") ("^com\\.odiago\\." . "c") (".*" . "b"))))
+ '(jde-import-sorted-groups (quote asc))
  '(jde-javadoc-exception-tag-template "\"* @throws \" type")
  '(jde-jdk (quote ("1.6")))
  '(jde-jdk-doc-url "http://download.oracle.com/javase/6/docs/api")
- '(jde-jdk-registry (quote (("1.6" . "/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents"))))
+ '(jde-jdk-registry (quote (("1.6" . "/usr/lib/jdk/"))))
+ '(js-indent-level 2)
  '(menu-bar-mode nil)
  '(scroll-bar-mode nil)
  '(sh-basic-offset 2)
@@ -48,4 +53,5 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(default ((t (:inherit nil :stipple nil :background "white" :foreground "black" :inverse-video nil :box nil :strike-through nil :overline nil :underline nil :slant normal :weight normal :height 120 :width normal :foundry "unknown" :family "Ubuntu Mono"))))
  '(hl-line ((t (:background "#dee")))))
