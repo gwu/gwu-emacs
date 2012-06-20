@@ -5,6 +5,13 @@
 (load-file (expand-file-name "~/.emacs.d/java.el"))
 (load-file (expand-file-name "~/.emacs.d/compile.el"))
 
+;; Load Closure settings.
+(load-file (expand-file-name "~/.emacs.d/closure-template-html-mode.el"))
+
+;; Load Scala settings.
+(add-to-list 'load-path "~/.emacs.d/scala-mode")
+(require 'scala-mode-auto)
+
 ;; Fix the color formatting of the shell buffer
 (add-hook 'shell-mode-hook 'ansi-color-for-comint-mode-on)
 
@@ -32,7 +39,7 @@
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(jde-help-docsets (quote (("JDK API" "http://download.oracle.com/javase/6/docs/api" nil))))
- '(jde-import-group-of-rules (quote (("^javax?\\." . "a") ("^com\\.odiago\\." . "c") (".*" . "b"))))
+ '(jde-import-group-of-rules (quote (("^javax?\\." . "a") ("^com\\.wibidata\\." . "c") (".*" . "b"))))
  '(jde-import-sorted-groups (quote asc))
  '(jde-javadoc-exception-tag-template "\"* @throws \" type")
  '(jde-jdk (quote ("1.6")))
