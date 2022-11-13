@@ -37,6 +37,9 @@
 ;; Get rid of the menu bar (don't need to see menus).
 (menu-bar-mode 0)
 
+;; Git rid of scroll bars (don't need mouse handles).
+(scroll-bar-mode 0)
+
 ;;
 ;; Global settings.
 ;;
