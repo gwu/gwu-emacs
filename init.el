@@ -109,6 +109,10 @@
   (define-derived-mode tsx-mode web-mode "TypeScriptX")
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-mode)))
 
+;; Javascript mode.
+;; TODO: Should we use lsp mode for JS as well?
+(setq js-indent-level 2)
+
 ;; Typescript mode.
 (use-package typescript-mode
   :straight t
@@ -119,6 +123,11 @@
   :straight t
   :hook ((typescript-mode . lsp-deferred)
 	 (tsx-mode . lsp-deferred)))
+
+;; Prettier.
+(use-package prettier
+  :straight t
+  :init (setenv "NODE_ENV" "/home/gwu/n/bin"))
 
 ;;
 ;; Commands.

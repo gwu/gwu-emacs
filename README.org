@@ -1,4 +1,4 @@
-My emacs config
+# My emacs config
 
-To use, clone this into ~/.emacs.d and make sure there is no ~/.emacs file that may load
-before ~/.emacs.d/init.el
+To use, clone this into ~/.emacs.d and make sure there is no ~/.emacs file that
+may load before ~/.emacs.d/init.el
