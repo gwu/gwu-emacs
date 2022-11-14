@@ -1,4 +1,10 @@
 ;;
+;; Env.
+;;
+(setenv "PATH" (concat (getenv "PATH") ":/home/gwu/n/bin"))
+(add-to-list 'exec-path "/home/gwu/n/bin")
+
+;;
 ;; Package management.
 ;;
 
@@ -44,6 +50,9 @@
 ;; Global settings.
 ;;
 
+;; Show column number in mode line.
+(column-number-mode)
+
 ;; Fill settings.
 (setq-default fill-column 100)
 (global-display-fill-column-indicator-mode t)
@@ -66,11 +75,11 @@
 (use-package evil
   :straight t
   :init (setq evil-want-keybinding nil)
-  :config (evil-mode 1))
-(use-package evil-collection
-  :straight t
-  :after evil
-  :config (evil-collection-init))
+  :config
+  (use-package evil-collection
+    :straight t
+    :config (evil-collection-init))
+  (evil-mode 1))
 
 ;;
 ;; Tools.
@@ -88,6 +97,28 @@
 ;; Magit (git client).
 (use-package magit
   :straight t)
+
+;; Web mode.
+(use-package web-mode
+  :straight t
+  :config
+  (setq web-mode-markup-indent-offset 2)
+  (setq web-mode-css-indent-offset 2)
+  (setq web-mode-code-indent-offset 2)
+  (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
+  (define-derived-mode tsx-mode web-mode "TypeScriptX")
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-mode)))
+
+;; Typescript mode.
+(use-package typescript-mode
+  :straight t
+  :config (setq typescript-indent-level 2))
+
+;; LSP.
+(use-package lsp-mode
+  :straight t
+  :hook ((typescript-mode . lsp-deferred)
+	 (tsx-mode . lsp-deferred)))
 
 ;;
 ;; Commands.
