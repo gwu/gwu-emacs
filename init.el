@@ -88,7 +88,8 @@
 ;; Helm for better M-x.
 (use-package helm
   :straight t
-  :bind ("M-x" . helm-M-x))
+  :bind (("M-x" . helm-M-x)
+	 ("C-h a" . helm-apropos)))
 
 ;; Terminal (vterm).
 (use-package vterm
@@ -100,7 +101,8 @@
   :config
   (use-package treemacs-evil :straight t)
   (treemacs-hide-gitignored-files-mode 1)
-  (treemacs-git-mode 'deferred))
+  (treemacs-git-mode 'deferred)
+  :bind ("C-c t" . treemacs))
 
 ;; Magit (git client).
 (use-package magit
