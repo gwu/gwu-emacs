@@ -79,6 +79,11 @@
 ;; Tools.
 ;;
 
+;; Helm for better M-x.
+(use-package helm
+  :straight t
+  :bind ("M-x" . helm-M-x))
+
 ;; Terminal (vterm).
 (use-package vterm
   :straight t)
@@ -86,7 +91,10 @@
 ;; Treemacs (eclipse-like project explorer).
 (use-package treemacs
   :straight t
-  :config (use-package treemacs-evil :straight t))
+  :config
+  (use-package treemacs-evil :straight t)
+  (treemacs-hide-gitignored-files-mode 1)
+  (treemacs-git-mode 'deferred))
 
 ;; Magit (git client).
 (use-package magit
