@@ -1,10 +1,4 @@
 ;;
-;; Env.
-;;
-(setenv "PATH" (concat (getenv "PATH") ":/home/gwu/n/bin"))
-(add-to-list 'exec-path "/home/gwu/n/bin")
-
-;;
 ;; Package management.
 ;;
 
@@ -33,9 +27,6 @@
 ;; Disable the startup message displayed in the echo area.
 (defun display-startup-echo-area-message ()
   (message (concat "Let the hacking begin, " user-login-name ".")))
-
-;; Start in full screen mode.
-(toggle-frame-fullscreen)
 
 ;; Get rid of the tool bar (we don't need buttons).
 (tool-bar-mode 0)
@@ -71,7 +62,7 @@
 ;; Disable the stupid *~ backup files, which only happen on first save anyway.
 (setq make-backup-files nil)
 
-;; Evil mode (with evil-collection's keybindings instead of the default)
+;; Evil mode (with evil-collection's keybindings instead of the default).
 (use-package evil
   :straight t
   :init (setq evil-want-keybinding nil)
@@ -80,6 +71,9 @@
     :straight t
     :config (evil-collection-init))
   (evil-mode 1))
+
+;; Maximize the frame.
+(toggle-frame-maximized)
 
 ;;
 ;; Tools.
@@ -127,7 +121,7 @@
 ;; Prettier.
 (use-package prettier
   :straight t
-  :init (setenv "NODE_ENV" "/home/gwu/n/bin"))
+  :commands prettier-prettify)
 
 ;;
 ;; Commands.
