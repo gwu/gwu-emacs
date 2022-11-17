@@ -34,9 +34,6 @@
 (defun display-startup-echo-area-message ()
   (message (concat "Let the hacking begin, " user-login-name ".")))
 
-;; Start in full screen mode.
-(toggle-frame-fullscreen)
-
 ;; Get rid of the tool bar (we don't need buttons).
 (tool-bar-mode 0)
 
@@ -83,6 +80,8 @@
   (use-package evil-escape
     :straight t
     :config (evil-escape-mode))
+  (use-package org-evil
+    :straight t)
   (evil-mode 1))
 
 ;;

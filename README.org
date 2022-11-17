@@ -1,9 +1,11 @@
-# My emacs config
+#+TITLE: My emacs config
 
 To use, clone this into ~/.emacs.d and make sure there is no ~/.emacs file that
 may load before ~/.emacs.d/init.el
 
-* Feature requests
-** Prettier + TS Standard
-** Slightly higher-contrast theme
-** Command to create a storybook story
+* [1/5] Feature requests
+- [ ] Prettier + TS Standard
+- [ ] Command to create a storybook story
+- [X] Evil keybindings for org mode
+- [ ] Space leader key
+- [ ] Which key
