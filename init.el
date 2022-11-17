@@ -47,6 +47,9 @@
 ;; Global settings.
 ;;
 
+(use-package general
+  :straight t)
+
 ;; Show column number in mode line.
 (column-number-mode)
 
@@ -70,19 +73,33 @@
 
 ;; Evil mode (with evil-collection's keybindings instead of the default).
 (use-package evil
+  :after general
   :straight t
+  :general ('motion "," nil)
   :init (setq evil-want-keybinding nil)
+  :config (evil-mode 1))
+
+(use-package evil-collection
+  :straight t
+  :after evil
+  :init (setq evil-collection-setup-minibuffer t)
+  :config (evil-collection-init))
+
+(use-package evil-escape
+  :straight t
+  :after evil
+  :config (evil-escape-mode))
+
+(use-package evil-org
+  :straight t
+  :hook (org-mode . evil-org-mode)
+  :general
+  (org-mode-map :prefix ","
+                "c" 'org-toggle-checkbox)
   :config
-  (use-package evil-collection
-    :straight t
-    :init (setq evil-collection-setup-minibuffer t)
-    :config (evil-collection-init))
-  (use-package evil-escape
-    :straight t
-    :config (evil-escape-mode))
-  (use-package org-evil
-    :straight t)
-  (evil-mode 1))
+  (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
 
 ;;
 ;; Tools.
@@ -101,8 +118,7 @@
 
 ;; Terminal (vterm).
 (use-package vterm
-  :straight t
-  :bind ("C-c v" . vterm))
+  :straight t)
 
 ;; Treemacs (eclipse-like project explorer).
 (use-package treemacs
@@ -110,12 +126,12 @@
   :config
   (use-package treemacs-evil :straight t)
   (treemacs-hide-gitignored-files-mode 1)
-  (treemacs-git-mode 'deferred)
-  :bind ("C-c t" . treemacs))
+  (treemacs-git-mode 'deferred))
 
 ;; Magit (git client).
 (use-package magit
-  :straight t)
+  :straight t
+  :commands magit)
 
 ;; Web mode.
 (use-package web-mode
@@ -147,7 +163,7 @@
 
 (use-package lsp-treemacs
   :straight t
-  :bind ("C-c e" . lsp-treemacs-errors-list))
+  :commands lsp-treemacs-errors-list)
 
 ;; Prettier.
 (use-package prettier
@@ -163,3 +179,32 @@
   "Visit your emacs init file."
   (interactive)
   (find-file user-init-file))
+
+
+;;
+;; Global key bindings
+;;
+(general-def 'motion :prefix "SPC"
+  "" nil
+  "SPC" 'helm-M-x
+  "b" 'helm-buffers-list
+  "f f" 'helm-find-files
+  "s" 'helm-occur
+  "t" 'vterm
+  "p" 'treemacs
+  "g" 'magit
+  "= =" 'prettier-prettify)
+
+;;
+;; Specific to my projects.
+;;
+(setq safe-local-variable-values
+      '((eval let
+	      ((project-directory
+		(car
+		 (dir-locals-find-file default-directory))))
+	      (setq lsp-clients-typescript-server-args
+		    `("--tsserver-path"
+		      ,(concat project-directory
+			       ".yarn/sdks/typescript/bin/tsserver")
+		      "--stdio")))))
