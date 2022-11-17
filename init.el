@@ -62,9 +62,6 @@
 ;; Disable the stupid *~ backup files, which only happen on first save anyway.
 (setq make-backup-files nil)
 
-;; Maximize the frame.
-(toggle-frame-maximized)
-
 ;; Evil mode (with evil-collection's keybindings instead of the default).
 (use-package evil
   :straight t
