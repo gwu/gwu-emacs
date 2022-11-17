@@ -74,6 +74,8 @@
   (use-package evil-escape
     :straight t
     :config (evil-escape-mode))
+  (use-package org-evil
+    :straight t)
   (evil-mode 1))
 
 ;; Maximize the frame.
