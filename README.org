@@ -2,3 +2,8 @@
 
 To use, clone this into ~/.emacs.d and make sure there is no ~/.emacs file that
 may load before ~/.emacs.d/init.el
+
+* Feature requests
+** Prettier + TS Standard
+** Slightly higher-contrast theme
+** Command to create a storybook story

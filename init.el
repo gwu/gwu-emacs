@@ -52,7 +52,7 @@
 (setq ring-bell-function 'ignore)
 
 ;; No tabs, please.
-(setq indent-tabs-mode nil)
+(setq-default indent-tabs-mode nil)
 
 ;; Theme.
 (use-package zenburn-theme
@@ -62,6 +62,9 @@
 ;; Disable the stupid *~ backup files, which only happen on first save anyway.
 (setq make-backup-files nil)
 
+;; Maximize the frame.
+(toggle-frame-maximized)
+
 ;; Evil mode (with evil-collection's keybindings instead of the default).
 (use-package evil
   :straight t
@@ -69,7 +72,11 @@
   :config
   (use-package evil-collection
     :straight t
+    :init (setq evil-collection-setup-minibuffer t)
     :config (evil-collection-init))
+  (use-package evil-escape
+    :straight t
+    :config (evil-escape-mode))
   (evil-mode 1))
 
 ;; Maximize the frame.
@@ -82,11 +89,18 @@
 ;; Helm for better M-x.
 (use-package helm
   :straight t
-  :bind ("M-x" . helm-M-x))
+  :bind (("M-x" . helm-M-x)
+	 ("C-h a" . helm-apropos)
+	 ("C-x b" . helm-buffers-list)
+	 ("C-x C-f" . helm-find-files)
+	 ("C-s" . helm-occur))
+  :demand t
+  :config (helm-mode 1))
 
 ;; Terminal (vterm).
 (use-package vterm
-  :straight t)
+  :straight t
+  :bind ("C-c v" . vterm))
 
 ;; Treemacs (eclipse-like project explorer).
 (use-package treemacs
@@ -94,7 +108,8 @@
   :config
   (use-package treemacs-evil :straight t)
   (treemacs-hide-gitignored-files-mode 1)
-  (treemacs-git-mode 'deferred))
+  (treemacs-git-mode 'deferred)
+  :bind ("C-c t" . treemacs))
 
 ;; Magit (git client).
 (use-package magit
@@ -108,7 +123,9 @@
   (setq web-mode-css-indent-offset 2)
   (setq web-mode-code-indent-offset 2)
   (add-to-list 'auto-mode-alist '("\\.html\\'" . web-mode))
-  (define-derived-mode tsx-mode web-mode "TypeScriptX")
+  (define-derived-mode tsx-mode web-mode "TypeScriptX"
+    "Minor mode for editing Typescript files with JSX syntax extensions."
+    (setq-local web-mode-enable-auto-quoting nil))
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-mode)))
 
 ;; Javascript mode.
@@ -125,6 +142,10 @@
   :straight t
   :hook ((typescript-mode . lsp-deferred)
 	 (tsx-mode . lsp-deferred)))
+
+(use-package lsp-treemacs
+  :straight t
+  :bind ("C-c e" . lsp-treemacs-errors-list))
 
 ;; Prettier.
 (use-package prettier
