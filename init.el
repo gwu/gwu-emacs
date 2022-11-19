@@ -76,6 +76,9 @@
 (use-package evil-collection
   :straight t
   :after evil
+  :demand t
+  :general
+  (magit-status-mode-map "SPC" nil)
   :init (setq evil-collection-setup-minibuffer t)
   :config (evil-collection-init))
 
@@ -88,12 +91,14 @@
   :straight t
   :hook (org-mode . evil-org-mode)
   :general
-  (org-mode-map :prefix ","
-                "c" 'org-toggle-checkbox)
+  ('normal org-mode-map :prefix ","
+           "c" 'org-toggle-checkbox)
   :config
   (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))
   (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
+  (evil-org-agenda-set-keys)
+  (setq fill-column 65)
+  (auto-fill-mode 1))
 
 ;; Maximize the frame.
 (toggle-frame-maximized)
@@ -101,6 +106,13 @@
 ;;
 ;; Tools.
 ;;
+
+;; Org mode.
+(add-hook
+ 'org-mode-hook
+ (lambda ()
+   (auto-fill-mode)
+   (setq-default fill-column 65)))
 
 ;; Helm for better M-x.
 (use-package helm
@@ -183,13 +195,25 @@
 (general-def 'motion :prefix "SPC"
   "" nil
   "SPC" 'helm-M-x
-  "b" 'helm-buffers-list
+  "b b" 'helm-buffers-list
+  "b d" 'evil-delete-buffer
   "f f" 'helm-find-files
+  "f s" 'save-buffer
   "s" 'helm-occur
   "t" 'vterm
-  "p" 'treemacs
+  "p" 'treemacs-select-window
   "g" 'magit
-  "= =" 'prettier-prettify)
+  "= =" 'prettier-prettify
+  "h" 'evil-window-left
+  "k" 'evil-window-up
+  "j" 'evil-window-down
+  "l" 'evil-window-right
+  "H" 'evil-window-move-far-left
+  "L" 'evil-window-move-far-right
+  "J" 'evil-window-move-very-bottom
+  "K" 'evil-window-move-vary-top
+  "w d" 'evil-window-delete
+  "w a" 'ace-window) 
 
 ;;
 ;; Specific to my projects.
