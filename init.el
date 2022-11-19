@@ -111,7 +111,10 @@
 (add-hook
  'org-mode-hook
  (lambda ()
-   (auto-fill-mode)
+   (setq org-directory "~/Documents/org")
+   (setq org-agenda-files
+         (directory-files-recursively org-directory "\\.org\\'"))
+   (auto-fill-mode 1)
    (setq-default fill-column 65)))
 
 ;; Helm for better M-x.
