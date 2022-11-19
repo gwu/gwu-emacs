@@ -92,7 +92,7 @@
   :hook (org-mode . evil-org-mode)
   :general
   ('normal org-mode-map :prefix ","
-           "c" 'org-toggle-checkbox)
+           "c" '(org-toggle-checkbox :wk "Toggle checkbox"))
   :config
   (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))
   (require 'evil-org-agenda)
@@ -181,6 +181,15 @@
   :straight t
   :commands prettier-prettify)
 
+;; Which key (to show what keybindings with leaders are).
+(use-package which-key
+  :straight t
+  :config
+  (which-key-mode)
+  (setq which-key-sort-order 'which-key-prefix-then-key-order)
+  (setq which-key-add-column-padding 8)
+  (setq which-key-max-display-columns 4))
+
 ;;
 ;; Commands.
 ;;
@@ -195,27 +204,38 @@
 ;; Global key bindings
 ;;
 (general-def 'motion :prefix "SPC"
-  "" nil
-  "SPC" 'helm-M-x
-  "b b" 'helm-buffers-list
-  "b d" 'evil-delete-buffer
-  "f f" 'helm-find-files
-  "f s" 'save-buffer
-  "s" 'helm-occur
-  "t" 'vterm
-  "p" 'treemacs-select-window
-  "g" 'magit
-  "= =" 'prettier-prettify
-  "h" 'evil-window-left
-  "k" 'evil-window-up
-  "j" 'evil-window-down
-  "l" 'evil-window-right
-  "H" 'evil-window-move-far-left
-  "L" 'evil-window-move-far-right
-  "J" 'evil-window-move-very-bottom
-  "K" 'evil-window-move-vary-top
-  "w d" 'evil-window-delete
-  "w a" 'ace-window) 
+  "" '(nil :wk "Main")
+  "SPC" '(helm-M-x :wk "Execute extended command")
+  "b" '(nil :wk "Buffer")
+  "b b" '(helm-buffers-list :wk "Switch to buffer")
+  "b d" '(evil-delete-buffer :wk "Delete buffer")
+  "b l" '(list-buffers :wk "List buffers")
+  "f" '(nil :wk "File")
+  "f f" '(helm-find-files :wk "Find file")
+  "f s" '(save-buffer :wk "Save file")
+  "f e" '(visit-user-init-file :wk "Open Emacs init.el file")
+  "s" '(helm-occur :wk "Search buffer")
+  "t" '(vterm :wk "Open terminal")
+  "p" '(treemacs-select-window :wk "Project panel")
+  "g" '(magit :wk "Git status")
+  "=" '(nil :wk "Format")
+  "= =" '(prettier-prettify :wk "Prettify buffer")
+  "h" '(evil-window-left :wk "Select window left")
+  "k" '(evil-window-up :wk "Select window up")
+  "j" '(evil-window-down :wk "Select window down")
+  "l" '(evil-window-right :wk "Select window right")
+  "H" '(evil-window-move-far-left :wk "Move window right")
+  "L" '(evil-window-move-far-right :wk "Move window left")
+  "J" '(evil-window-move-very-bottom :wk "Move window down")
+  "K" '(evil-window-move-vary-top :wk "Move window up")
+  "w" '(nil :wk "Window")
+  "w d" '(evil-window-delete :wk "Delete window")
+  "w a" '(ace-window :wk "Select window")
+  "o" '(nil :wk "Org")
+  "o a" '(org-agenda :wk "Org agenda")
+  "o t" '(org-todo-list :wk "Org todo list")
+  "q" '(nil :wk "Quit")
+  "q q" '(save-buffers-kill-terminal :wk "Quit Emacs"))
 
 ;;
 ;; Specific to my projects.
