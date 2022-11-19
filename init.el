@@ -96,7 +96,8 @@
   :config
   (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))
   (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
+  (evil-org-agenda-set-keys)
+  (general-def 'motion org-agenda-mode-map "SPC" nil))
 
 ;; Maximize the frame.
 (toggle-frame-maximized)
