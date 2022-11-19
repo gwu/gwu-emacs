@@ -102,9 +102,7 @@
   :config
   (evil-org-set-key-theme '(textobjects insert navigation additional shift todo heading))
   (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys)
-  (setq fill-column 65)
-  (auto-fill-mode 1))
+  (evil-org-agenda-set-keys))
 
 ;;
 ;; Tools.
