@@ -194,6 +194,12 @@
 ;; Commands.
 ;;
 
+;; Shortcut to open whatsup org file.
+(defun visit-work-org-file ()
+  "Visit your work whatsup org file."
+  (interactive)
+  (find-file "~/Documents/org/work/whatsup.org"))
+
 ;; Shortcut to open this init.el file.
 (defun visit-user-init-file ()
   "Visit your emacs init file."
@@ -232,6 +238,7 @@
   "w d" '(evil-window-delete :wk "Delete window")
   "w a" '(ace-window :wk "Select window")
   "o" '(nil :wk "Org")
+  "o o" '(visit-work-org-file :wk "Open work whatsup file")
   "o a" '(org-agenda :wk "Org agenda")
   "o t" '(org-todo-list :wk "Org todo list")
   "q" '(nil :wk "Quit")
